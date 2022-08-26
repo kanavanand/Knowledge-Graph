@@ -1,5 +1,4 @@
 import pandas as pd
-import pandas_profiling as pp
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -195,7 +194,7 @@ target ='label'
 X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 
 # Train model
-pipeline = make_pipeline(StandardScaler(),  GaussianNB())
+pipeline = make_pipeline(StandardScaler(),  RandomForestClassifier())
 model = pipeline.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 conf_matrix = confusion_matrix(y_test,y_pred)
