@@ -142,7 +142,7 @@ def free_test_init_state_variables():
         if k not in st.session_state:
             st.session_state[k] = v
 
-st.title('Knowledge Graphs using ')
+st.title('Knowledge Graphs using Rebel')
 st.markdown(
 """
 ###### Building Beautiful Knowledge Graphs by getting relations between text enteties 
