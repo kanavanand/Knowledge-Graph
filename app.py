@@ -1,5 +1,4 @@
 from logging import disable
-from pkg_resources import EggMetadata
 import streamlit as st
 import streamlit.components.v1 as components
 import networkx as nx
@@ -12,6 +11,7 @@ from datetime import datetime as dt
 import os
 
 MAX_TOPICS = 3
+
 
 wiki_state_variables = {
     'has_run_wiki':False,
@@ -103,7 +103,7 @@ def wiki_add_text(term):
 
     except wikipedia.DisambiguationError as e:
         print(e)
-        with st.spinner(text="Woops, ambigious term, recalculating options..."):
+        with st.spinner(text="Woops, ambigious term, recalculating options.."):
             st.session_state['nodes'].remove(term)
             temp = st.session_state['nodes'] + e.options[:3]
             st.session_state['nodes'] = list(set(temp))
@@ -142,10 +142,11 @@ def free_test_init_state_variables():
         if k not in st.session_state:
             st.session_state[k] = v
 
-st.title('RE:Belle')
+st.title('Knowledge Graphs using ')
 st.markdown(
 """
-### Building Beautiful Knowledge Graphs With REBEL
+###### Building Beautiful Knowledge Graphs by getting relations between text enteties 
+Rebel Link -> https://github.com/Babelscape/rebel
 """)
 st.selectbox(
      'input method',
@@ -232,23 +233,3 @@ else:
     show_free_text_hub_page()
 
 
-
-st.sidebar.markdown(
-"""
-## What This Is And Why We Built it
-
-This space shows how a transformer network can be used to convert *human* text into a computer-queryable format: a **knowledge graph**. Knowledge graphs are graphs where each node (or *vertex* if you're fancy) represent a concept/person/thing and each edge the link between those concepts. If you'd like to know more, you can read [this blogpost](https://www.ml6.eu/knowhow/knowledge-graphs-an-introduction-and-business-applications).
-
-Knowledge graphs aren't just cool to look at, they are an extremely versatile way of storing data, and are used in machine learning to perform tasks like fraud detection. You can read more about the applications of knowledge graphs in ML in [this blogpost](https://blog.ml6.eu/how-are-knowledge-graphs-and-machine-learning-related-ff6f5c1760b5).
-
-There is one problem though: building knowledge graphs from scratch is a time-consuming and tedious task, so it would be a lot easier if we could leverage machine learning to **create** them from existing texts. This demo shows how a model named **REBEL** has been trained to do just that: it reads summaries from Wikipedia (or any other text you input), and generates a graph containing the information it distills from the text.
-"""
-)
-
-st.sidebar.markdown(
-"""
-*Credits for the REBEL model go out to Pere-Lluís Huguet Cabot and Roberto Navigli.
-The code can be found [here](https://github.com/Babelscape/rebel),
-and the original paper [here](https://github.com/Babelscape/rebel/blob/main/docs/EMNLP_2021_REBEL__Camera_Ready_.pdf)*
-"""
-)
